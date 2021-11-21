@@ -15,6 +15,8 @@ const onLoad = () => {
 const syncPacks = (type: PackType) => {
   const packs = getUASPacksName(type);
 
+  console.log(packs);
+
   // TODO: save to chrome storage
   // send notification about the result
   syncNotification(true, PackOrigin.UAS, type);

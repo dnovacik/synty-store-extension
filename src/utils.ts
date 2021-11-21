@@ -1,5 +1,5 @@
 import { Pack, PackOrigin, PackType } from "./models";
-import { UAS_POLYGON_PURCHASED_XPATH, UAS_SIMPLE_PURCHASED_XPATH } from "./constants";
+import { UAS_POLYGON_PURCHASED_XPATH, UAS_SIMPLE_PURCHASED_XPATH, SS_POLYGON_PURCHASED_XPATH, SS_SIMPLE_PURCHASED_XPATH } from "./constants";
 
 export const getPackOriginName = (origin: PackOrigin) => {
   return origin === PackOrigin.SS
@@ -30,8 +30,30 @@ export const getUASPacksName = (type: PackType): Array<Pack> => {
   })
 }
 
-export const getSSPacksName = (type: PackType): Array<Pack> => {
-  return [];
+export const getSSPacksName = (): Array<Pack> => {
+  const polygon = getElementsByXPath(SS_POLYGON_PURCHASED_XPATH).map((pack) => {
+    return {
+      name: pack,
+      type: PackType.POLYGON,
+      owned: {
+        UAS: false,
+        SS: true
+      }
+    }
+  });
+
+  const simple = getElementsByXPath(SS_SIMPLE_PURCHASED_XPATH).map((pack) => {
+    return {
+      name: pack,
+      type: PackType.SIMPLE,
+      owned: {
+        UAS: false,
+        SS: true
+      }
+    }
+  });
+
+  return polygon.concat(simple);
 }
 
 export const getElementsByXPath = (path: string) => {
