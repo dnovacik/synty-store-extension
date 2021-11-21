@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Chrome Extension TypeScript Starter",
-  "description": "Chrome Extension, TypeScript, Visual Studio Code",
+  "name": "Synty Store Extensions",
+  "description": "Simple chrome extension to help users manage their synty assets between different stores",
   "version": "1.0",
   "options_ui": {
     "page": "options.html"
@@ -13,11 +13,22 @@
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "https://syntystore.com/*"
       ],
+      "run-at": "document_end",
       "js": [
         "js/vendor.js",
-        "js/content_script.js"
+        "js/syntystore.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://assetstore.unity.com/*"
+      ],
+      "run-at": "document_end",
+      "js": [
+        "js/vendor.js",
+        "js/unityassetstore.js"
       ]
     }
   ],
@@ -25,7 +36,9 @@
     "service_worker": "js/background.js"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "tabs",
+    "notifications"
   ],
   "host_permissions": [
     "<all_urls>"
