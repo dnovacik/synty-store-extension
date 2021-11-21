@@ -5,9 +5,9 @@ const srcDir = path.join(__dirname, "src");
 
 module.exports = {
   entry: {
-    popup: path.join(srcDir, 'popup.tsx'),
-    options: path.join(srcDir, 'options.tsx'),
-    background: path.join(srcDir, "background", 'background.ts'),
+    popup: path.join(srcDir, "popup.tsx"),
+    options: path.join(srcDir, "options.tsx"),
+    background: path.join(srcDir, "background", "background.ts"),
     unityassetstore: path.join(srcDir, "stores", "unityassetstore.ts"),
     syntystore: path.join(srcDir, "stores", "syntystore.ts")
   },
@@ -19,7 +19,7 @@ module.exports = {
     splitChunks: {
       name: "vendor",
       chunks(chunk) {
-        return chunk.name !== 'background';
+        return chunk.name !== "background";
       }
     },
   },
@@ -29,6 +29,17 @@ module.exports = {
         test: /\.tsx?$/,
         use: "ts-loader",
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "images/[hash]-[name].[ext]",
+            },
+          },
+        ],
       },
     ],
   },
