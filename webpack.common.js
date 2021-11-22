@@ -7,8 +7,9 @@ module.exports = {
   entry: {
     popup: path.join(srcDir, "popup.tsx"),
     options: path.join(srcDir, "options.tsx"),
-    background: path.join(srcDir, "background.ts"),
-    content_script: path.join(srcDir, "content_script.ts"),
+    background: path.join(srcDir, "background", "background.ts"),
+    unityassetstore: path.join(srcDir, "stores", "unityassetstore.ts"),
+    syntystore: path.join(srcDir, "stores", "syntystore.ts"),
   },
   output: {
     path: path.join(__dirname, "dist/js"),
@@ -28,6 +29,17 @@ module.exports = {
         test: /\.tsx?$/,
         use: "ts-loader",
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "images/[hash]-[name].[ext]",
+            },
+          },
+        ],
       },
     ],
   },
