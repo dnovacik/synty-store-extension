@@ -1,22 +1,23 @@
-import { PacksData, Pack, PackType, PackOrigin, MessageRequest } from "./../models";
+import { PackOrigin, MessageRequest } from "../models";
 import { SS_LINK, NOTIFICATIONS_REQUEST } from "../constants";
-import { getPackOriginName, getSSPacksName, getPackTypeName } from "./../utils";
+import { getPackOriginName, getSSPacksName } from "../utils";
+import { saveToSyncedStorage } from "../background/storage";
 
-const onLoad = () => {
+const onLoad = async () => {
   if (location.href.includes(SS_LINK)) {
-    syncPacks();
+    await syncPacks();
   }
-}
+};
 
-const syncPacks = () => {
+const syncPacks = async () => {
   const packs = getSSPacksName();
 
   console.log(packs);
 
-  // TODO: save to chrome storage
+  await saveToSyncedStorage(packs);
   // send notification about the result
   syncNotification(true, PackOrigin.UAS);
-}
+};
 
 const syncNotification = (success: boolean, origin: PackOrigin) => {
   const options = {
@@ -24,18 +25,20 @@ const syncNotification = (success: boolean, origin: PackOrigin) => {
     title: `Synchronization finished`,
     silent: true,
     requireInteraction: false,
-    message: `Synchronization from ${getPackOriginName(origin)} ${success ? "completed" : "failed"}!`,
-    iconUrl: "../favicon.png"
+    message: `Synchronization from ${getPackOriginName(origin)} ${
+      success ? "completed" : "failed"
+    }!`,
+    iconUrl: "../favicon.png",
   };
 
   const request: MessageRequest = {
     type: NOTIFICATIONS_REQUEST,
-    data: options
+    data: options,
   };
 
   // send to background for sync result notification
   chrome.runtime.sendMessage(request);
-}
+};
 
 // listeners
 window.addEventListener("load", () => {

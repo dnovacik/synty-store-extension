@@ -9,7 +9,7 @@ module.exports = {
     options: path.join(srcDir, "options.tsx"),
     background: path.join(srcDir, "background", "background.ts"),
     unityassetstore: path.join(srcDir, "stores", "unityassetstore.ts"),
-    syntystore: path.join(srcDir, "stores", "syntystore.ts")
+    syntystore: path.join(srcDir, "stores", "syntystore.ts"),
   },
   output: {
     path: path.join(__dirname, "dist/js"),
@@ -20,7 +20,7 @@ module.exports = {
       name: "vendor",
       chunks(chunk) {
         return chunk.name !== "background";
-      }
+      },
     },
   },
   module: {
