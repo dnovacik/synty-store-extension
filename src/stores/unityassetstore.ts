@@ -5,23 +5,24 @@ import {
   NOTIFICATIONS_REQUEST,
 } from "../constants";
 import { getPackOriginName, getUASPacksName, getPackTypeName } from "../utils";
+import { saveToSyncedStorage } from "../background/storage";
 
-const onLoad = () => {
+const onLoad = async () => {
   if (location.href === UAS_POLYGON_SERIES_LINK) {
-    syncPacks(PackType.POLYGON);
+    await syncPacks(PackType.POLYGON);
   } else if (location.href === UAS_SIMPLE_SERIES_LINK) {
-    syncPacks(PackType.SIMPLE);
+    await syncPacks(PackType.SIMPLE);
   } else {
     return;
   }
 };
 
-const syncPacks = (type: PackType) => {
+const syncPacks = async (type: PackType) => {
   const packs = getUASPacksName(type);
 
   console.log(packs);
 
-  // TODO: save to chrome storage
+  await saveToSyncedStorage(packs);
   // send notification about the result
   syncNotification(true, PackOrigin.UAS, type);
 };

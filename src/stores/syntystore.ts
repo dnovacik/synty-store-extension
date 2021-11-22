@@ -1,19 +1,20 @@
 import { PackOrigin, MessageRequest } from "../models";
 import { SS_LINK, NOTIFICATIONS_REQUEST } from "../constants";
 import { getPackOriginName, getSSPacksName } from "../utils";
+import { saveToSyncedStorage } from "../background/storage";
 
-const onLoad = () => {
+const onLoad = async () => {
   if (location.href.includes(SS_LINK)) {
-    syncPacks();
+    await syncPacks();
   }
 };
 
-const syncPacks = () => {
+const syncPacks = async () => {
   const packs = getSSPacksName();
 
   console.log(packs);
 
-  // TODO: save to chrome storage
+  await saveToSyncedStorage(packs);
   // send notification about the result
   syncNotification(true, PackOrigin.UAS);
 };
