@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import { Pack } from "./models";
+import { PackData } from "./packData";
 
 export const Popup = ({}) => {
-  const sendScrapeUASMessage = () => {
-    chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
-      const activeTab = tabs[0];
-      if (!activeTab.id) return console.log("CANNOT FIND TAB");
-
-      chrome.tabs.sendMessage(activeTab.id, "syncUAS");
-    });
-  };
-
+  const [packs, setPacks] = useState<Pack[]>();
+  chrome.storage.sync
+    .get(["syntyAssets"])
+    .then((data) => setPacks(data["syntyAssets"]));
   return (
     <>
-      <button onClick={sendScrapeUASMessage}>Sync Asset Store</button>
+      <h3>Your Assets:</h3>
+      {packs?.map((pack) => (
+        <PackData pack={pack} key={packs?.indexOf(pack)} />
+      ))}
     </>
   );
 };

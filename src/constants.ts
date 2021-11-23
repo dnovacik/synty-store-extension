@@ -10,5 +10,3 @@ export const UAS_SIMPLE_PURCHASED_XPATH = `//*[@id="main-layout-scroller"]/div/d
 export const SS_LINK = "https://syntystore.com/apps/downloads/orders/";
 export const SS_POLYGON_PURCHASED_XPATH = `//*[@id="synty-store"]/main/div[1]/div/div/div[2]/a/div/div[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'polygon')]]`;
 export const SS_SIMPLE_PURCHASED_XPATH = `//*[@id="synty-store"]/main/div[1]/div/div/div[2]/a/div/div[text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'simple')]]`;
-// TODO change this as desired
-export const PACKS_CHROME_STORAGE_KEY = "synty-asset-store";
