@@ -1,14 +1,14 @@
 import { Pack } from "../models";
-import { PACKS_CHROME_STORAGE_KEY } from "../constants";
 
 export const saveToSyncedStorage = async (packs: Pack[]) => {
-  const currentPacks = await chrome.storage.sync.get([
-    PACKS_CHROME_STORAGE_KEY,
-  ]);
-  const packSet = new Set(currentPacks[PACKS_CHROME_STORAGE_KEY]);
+  const currentPacks = await chrome.storage.sync.get(["syntyAssets"]);
+  const packSet = new Set(currentPacks["syntyAssets"]);
 
   packs.forEach((pack) => packSet.add(pack));
   const uniquePacks = Array.from(packSet);
-
-  await chrome.storage.sync.set({ PACKS_CHROME_STORAGE_KEY: uniquePacks });
+  console.log(`DEBUG--------------------------
+  current: ${JSON.stringify(currentPacks, null, 2)}
+  new: ${JSON.stringify(packs, null, 2)},
+  unique: ${JSON.stringify(uniquePacks, null, 2)}`);
+  await chrome.storage.sync.set({ syntyAssets: uniquePacks });
 };
