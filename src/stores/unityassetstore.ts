@@ -5,7 +5,7 @@ import {
   NOTIFICATIONS_REQUEST,
 } from "../constants";
 import { getPackOriginName, getUASPacksName, getPackTypeName } from "../utils";
-import { saveToSyncedStorage } from "../background/storage";
+import { savePacksToSyncedStorage } from "../background/storage";
 
 const onLoad = async () => {
   if (location.href === UAS_POLYGON_SERIES_LINK) {
@@ -22,7 +22,7 @@ const syncPacks = async (type: PackType) => {
 
   console.log(packs);
 
-  await saveToSyncedStorage(packs);
+  await savePacksToSyncedStorage(packs);
   // send notification about the result
   syncNotification(true, PackOrigin.UAS, type);
 };
