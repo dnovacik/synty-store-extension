@@ -4,9 +4,18 @@ import { Pack } from "./models";
 
 export const Popup = ({}) => {
   const [packs, setPacks] = useState<Pack[]>();
-  chrome.storage.sync
-    .get(["syntyAssets"])
-    .then((data) => setPacks(data["syntyAssets"]));
+
+  const reloadPacks = () => {
+    chrome.storage.sync
+      .get(["syntyAssets"])
+      .then((data) => setPacks(data["syntyAssets"]));
+  };
+  reloadPacks();
+
+  const clearStorage = () => {
+    chrome.storage.sync.set({ syntyAssets: [] }).then(() => reloadPacks());
+  };
+
   return (
     <>
       <h3>Your Assets:</h3>
@@ -27,6 +36,26 @@ export const Popup = ({}) => {
           {pack.owned.SS ? <span>Owned on SS</span> : null}
         </div>
       ))}
+
+      <div>
+        <button
+          onClick={reloadPacks}
+          style={{
+            margin: "10px",
+            marginTop: "20px",
+          }}
+        >
+          Reload
+        </button>
+        <button
+          onClick={clearStorage}
+          style={{
+            margin: "10px",
+          }}
+        >
+          Clear Storage
+        </button>
+      </div>
     </>
   );
 };

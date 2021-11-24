@@ -101,9 +101,11 @@ export const flattenPackName = (name: string) => {
       ? PackType.POLYGON
       : PackType.SIMPLE;
 
+  const baseName = match.groups.Name.replace(/[Pp]ack/, "").trim();
+
   return {
-    name: `${type} - ${match.groups.Name}`,
-    baseName: match.groups.Name,
+    name: `${type} - ${baseName}`,
+    baseName,
     type,
   };
 };
