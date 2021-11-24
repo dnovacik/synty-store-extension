@@ -1,7 +1,7 @@
 import { PackOrigin, MessageRequest } from "../models";
 import { SS_LINK, NOTIFICATIONS_REQUEST } from "../constants";
 import { getPackOriginName, getSSPacksName } from "../utils";
-import { saveToSyncedStorage } from "../background/storage";
+import { savePacksToSyncedStorage } from "../background/storage";
 
 const onLoad = async () => {
   if (location.href.includes(SS_LINK)) {
@@ -14,7 +14,7 @@ const syncPacks = async () => {
 
   console.log(packs);
 
-  await saveToSyncedStorage(packs);
+  await savePacksToSyncedStorage(packs);
   // send notification about the result
   syncNotification(true, PackOrigin.UAS);
 };

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Pack } from "./models";
-import { PackData } from "./packData";
 
 export const Popup = ({}) => {
   const [packs, setPacks] = useState<Pack[]>();
@@ -12,7 +11,21 @@ export const Popup = ({}) => {
     <>
       <h3>Your Assets:</h3>
       {packs?.map((pack) => (
-        <PackData pack={pack} key={packs?.indexOf(pack)} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "300px",
+          }}
+        >
+          <b>
+            <span>{pack.name}</span>
+          </b>
+          <span>Series: {pack.type}</span>
+
+          {pack.owned.UAS ? <span>Owned on UAS</span> : null}
+          {pack.owned.SS ? <span>Owned on SS</span> : null}
+        </div>
       ))}
     </>
   );
