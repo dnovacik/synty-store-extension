@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'RobotoCondensedRegular';
+  src: url(./assets/fonts/RobotoCondensed-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoCondensedBold';
+  src: url(./assets/fonts/RobotoCondensed-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoCondensedLight';
+  src: url(./assets/fonts/RobotoCondensed-Light.ttf) format('truetype');
+}
+
+*, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'RobotoCondensedRegular';
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  background: #000;
+}

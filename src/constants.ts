@@ -1,3 +1,7 @@
+import pkg from "./../package.json";
+
+export const EXTENSION_VERSION = pkg.version;
+
 export const NOTIFICATIONS_REQUEST = "NOTIFICATION";
 
 export const UAS_POLYGON_SERIES_LINK =

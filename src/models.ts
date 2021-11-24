@@ -3,7 +3,8 @@ export interface MessageRequest {
   data: any;
 }
 
-export interface PacksData {
+export interface PersistedData {
+  version: string;
   packs: Array<Pack>;
 }
 

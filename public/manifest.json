@@ -16,7 +16,7 @@
         "https://assetstore.unity.com/account/assets",
         "https://syntystore.com/*"
       ],
-      "run-at": "document_end",
+      "run-at": "document_idle",
       "js": [
         "js/vendor.js",
         "js/syntystore.js"
@@ -26,7 +26,7 @@
       "matches": [
         "https://assetstore.unity.com/*"
       ],
-      "run-at": "document_end",
+      "run-at": "document_idle",
       "js": [
         "js/vendor.js",
         "js/unityassetstore.js"

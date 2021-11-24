@@ -31,13 +31,18 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png|jp(e*)g|svg|gif)$/,
+        test: /\.(css|scss)$/,
+        use: "style-loader"
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(svg|png|jpe?g|gif)$/i,
         use: [
           {
-            loader: "file-loader",
-            options: {
-              name: "images/[hash]-[name].[ext]",
-            },
+            loader: 'file-loader',
           },
         ],
       },

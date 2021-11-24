@@ -7,15 +7,14 @@ import {
 } from "./constants";
 import _ from "lodash";
 
-const packNameRegex =
-  /(?<Series>POLYGON|Simple)( - )? ?(?<Name>[\w ]+)(.*)(Pack)?(.*)/i;
+const packNameRegex = /(?<Series>POLYGON|Simple)( - )? ?(?<Name>[\w- ]+)(.*)(Pack)?(.*)/i;
 
 export const getPackOriginName = (origin: PackOrigin) => {
   return origin === PackOrigin.SS ? "Synty Store" : "Unity Asset Store";
 };
 
 export const getPackTypeName = (type: PackType) => {
-  return type === PackType.POLYGON ? "Polygon Series" : "Simple Serires";
+  return type === PackType.POLYGON ? "Polygon Series" : "Simple Series";
 };
 
 export const getUASPacksName = (type: PackType): Array<Pack> => {
@@ -125,15 +124,15 @@ export const flattenPack = (pack: Pack): Pack => {
   }
 };
 
-export const flattenPacks = (packs: Pack[]): Pack[] => {
+export const flattenPacks = (packs: Array<Pack>): Array<Pack> => {
   return packs.map((pack: Pack) => flattenPack(pack));
 };
 
-const arrHasPack = (arr: Pack[], pack: Pack) => {
+const arrHasPack = (arr: Array<Pack>, pack: Pack) => {
   return !!arr.find((p) => p.name === pack.name);
 };
 
-export const mergePacks = (original: Pack[], newPacks: Pack[]): Pack[] => {
+export const mergePacks = (original: Array<Pack>, newPacks: Array<Pack>): Array<Pack> => {
   const packs = [...original];
   /*
   1) if original doesn't have newPack, add it
